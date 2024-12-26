@@ -39,9 +39,3 @@ export interface IArchivedBlog {
 	year: string
 	blogs: IBlog[]
 }
-
-export interface IParams {
-	params: {
-		slug: string
-	}
-}

@@ -4,7 +4,6 @@ import parse from 'html-react-parser'
 import { ArrowUpRight, Calendar, Clock, Minus } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
 import ShareBtns from '../../_components/share-btns'
 
 export async function generateMetadata({
@@ -22,13 +21,8 @@ export async function generateMetadata({
 		},
 	}
 }
-interface IPageProps {
-	params: {
-		slug: string
-	}
-}
 
-const SlugPage: FC<IPageProps> = async ({ params }) => {
+async function SlugPage({ params }: { params: { slug: string } }) {
 	const blog = await getDetailedBlog(params.slug)
 	return (
 		<div className='pt-[12vh] max-w-5xl mx-auto'>

@@ -1,15 +1,8 @@
 import BlogCard from '@/components/cards/blog-card'
 import { getDetailedAuthor } from '@/service/author.service'
 import Image from 'next/image'
-import { FC } from 'react'
 
-interface IPageProps {
-	params: {
-		slug: string
-	}
-}
-
-const AuthorsPage: FC<IPageProps> = async ({ params }) => {
+async function AuthorsPage({ params }: { params: { slug: string } }) {
 	const author = await getDetailedAuthor(params.slug)
 	return (
 		<div className='max-w-6xl mx-auto pt-28'>

@@ -2,28 +2,20 @@ import BlogCard from '@/components/cards/blog-card'
 import { getBlogsByTag } from '@/service/tags.service'
 import { Dot, Home } from 'lucide-react'
 import Link from 'next/link'
-import { FC } from 'react'
-
-interface IPageProps {
-	params: {
-		slug: string
-	}
-}
 
 export async function generateMetadata({
 	params,
 }: {
 	params: { slug: string }
 }) {
-	const { slug } = await params
-	const blog = await getBlogsByTag(slug)
+	const blog = await getBlogsByTag(params.slug)
 
 	return {
 		title: blog.title,
 	}
 }
 
-const BlogsTagPage: FC<IPageProps> = async ({ params }) => {
+async function BlogsTagPage({ params }: { params: { slug: string } }) {
 	const tag = await getBlogsByTag(params.slug)
 	return (
 		<div className='max-w-6xl mx-auto'>
