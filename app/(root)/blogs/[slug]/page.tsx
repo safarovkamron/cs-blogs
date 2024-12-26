@@ -1,10 +1,10 @@
 import { getFormatDate, getReadingTime } from '@/lib/utils'
 import { getDetailedBlog } from '@/service/blog.service'
-import { IParams } from '@/types'
 import parse from 'html-react-parser'
 import { ArrowUpRight, Calendar, Clock, Minus } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { FC } from 'react'
 import ShareBtns from '../../_components/share-btns'
 
 export async function generateMetadata({
@@ -22,10 +22,14 @@ export async function generateMetadata({
 		},
 	}
 }
+interface IPageProps {
+	params: {
+		slug: string
+	}
+}
 
-async function SlugPage({ params }: IParams) {
-	const { slug } = params
-	const blog = await getDetailedBlog(slug)
+const SlugPage: FC<IPageProps> = async ({ params }) => {
+	const blog = await getDetailedBlog(params.slug)
 	return (
 		<div className='pt-[12vh] max-w-5xl mx-auto'>
 			<h1 className='lg:text-5xl md:text-4xl text-3xl font-creteRound max-md:text-center'>
