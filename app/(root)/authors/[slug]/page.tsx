@@ -1,11 +1,9 @@
 import BlogCard from '@/components/cards/blog-card'
 import { getDetailedAuthor } from '@/service/author.service'
-import { IParams } from '@/types'
 import Image from 'next/image'
 
-async function AuthorsPage({ params }: IParams) {
-	const { slug } = params
-	const author = await getDetailedAuthor(slug)
+async function AuthorsPage({ params }: { params: { slug: string } }) {
+	const author = await getDetailedAuthor(params.slug)
 	return (
 		<div className='max-w-6xl mx-auto pt-28'>
 			<div className='flex mt-6 gap-6 items-center max-md:flex-col'>
