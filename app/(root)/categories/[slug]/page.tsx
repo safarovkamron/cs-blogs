@@ -1,14 +1,11 @@
 import BlogCard from '@/components/cards/blog-card'
 import { getBlogsByCategory } from '@/service/categories.service'
+import { IParams } from '@/types'
 import { Dot, Home } from 'lucide-react'
 import Link from 'next/link'
 
-export async function generateMetadata({
-	params,
-}: {
-	params: { slug: string }
-}) {
-	const { slug } = await params
+export async function generateMetadata({ params }: IParams) {
+	const { slug } = params
 	const blog = await getBlogsByCategory(slug)
 
 	return {
