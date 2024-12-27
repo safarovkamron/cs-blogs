@@ -42,10 +42,8 @@ export const getBlogsByCategory = cache(async (slug: string) => {
 	`
 
 	const { category } = await request<{
-		category: { blogs: IBlog[]; title: string }
-	}>(graphqAPI, query, {
-		slug,
-	})
+		category: { blogs: IBlog[]; name: string }
+	}>(graphqAPI, query, { slug })
 
 	return category
 })

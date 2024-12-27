@@ -87,23 +87,31 @@ export const getDetailedBlog = cache(async (slug: string) => {
 	const query = gql`
 		query MyQuery($slug: String!) {
 			blog(where: { slug: $slug }) {
-				title
-				createdAt
-				slug
-				content {
-					text
-				}
-				image {
-					url
-				}
 				author {
 					name
-					bio
 					image {
 						url
 					}
+					bio
 					id
 				}
+				content {
+					text
+				}
+				createdAt
+				image {
+					url
+				}
+				slug
+				tag {
+					title
+					slug
+				}
+				category {
+					title
+					slug
+				}
+				title
 			}
 		}
 	`
