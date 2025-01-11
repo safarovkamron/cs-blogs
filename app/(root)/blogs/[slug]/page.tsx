@@ -9,9 +9,10 @@ import ShareBtns from '../../_components/share-btns'
 export async function generateMetadata({
 	params,
 }: {
-	params: { slug: string }
+	params: Promise<{ slug: string }>
 }) {
-	const blog = await getDetailedBlog(params.slug)
+	const blogSlug = (await params).slug
+	const blog = await getDetailedBlog(blogSlug)
 
 	return {
 		title: blog.title,
@@ -22,8 +23,9 @@ export async function generateMetadata({
 	}
 }
 
-async function SlugPage({ params }: { params: { slug: string } }) {
-	const blog = await getDetailedBlog(params.slug)
+async function SlugPage({ params }: { params: Promise<{ slug: string }> }) {
+	const blogSlug = (await params).slug
+	const blog = await getDetailedBlog(blogSlug)
 	return (
 		<div className='pt-[12vh] max-w-5xl mx-auto'>
 			<h1 className='lg:text-5xl md:text-4xl text-3xl font-creteRound max-md:text-center'>

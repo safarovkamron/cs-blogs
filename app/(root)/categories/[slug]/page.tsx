@@ -6,23 +6,25 @@ import Link from 'next/link'
 export async function generateMetadata({
 	params,
 }: {
-	params: { slug: string }
+	params: Promise<{ slug: string }>
 }) {
-	const blog = await getBlogsByCategory(params.slug)
+	const categorySlug = (await params).slug
+	const category = await getBlogsByCategory(categorySlug)
 
 	return {
-		title: blog.title,
+		title: category.name,
 	}
 }
 
-async function CategoryPage({ params }: { params: { slug: string } }) {
-	const category = await getBlogsByCategory(params.slug)
+async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+	const categorySlug = (await params).slug
+	const category = await getBlogsByCategory(categorySlug)
 
 	return (
 		<div className='max-w-6xl mx-auto'>
 			<div className='relative min-h-[40vh] flex items-center justify-center flex-col'>
 				<h2 className='text-center text-4xl section-title font-creteRound'>
-					<span>{category.title}</span>
+					<span>{category.name}</span>
 				</h2>
 
 				<div className='flex gap-1 items-center mt-4'>
